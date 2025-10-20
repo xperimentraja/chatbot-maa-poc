@@ -1,0 +1,191 @@
+/* Updated Chatbot.css with consistent modern layout and slot picker */
+
+.chatbot-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: #f7f8fa;
+}
+
+.chat-window {
+  width: 420px;
+  background: white;
+  border-radius: 12px;
+  padding: 16px;
+  box-shadow: 0 2px 14px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  font-family: "Segoe UI", sans-serif;
+}
+
+.chatbot-header {
+  font-weight: 600;
+  font-size: 18px;
+  text-align: center;
+  margin-bottom: 12px;
+  color: #0072ce;
+}
+
+.msg {
+  padding: 10px 12px;
+  margin: 6px 0;
+  border-radius: 8px;
+  max-width: 80%;
+}
+
+.msg.bot {
+  background: #f3f3f3;
+  align-self: flex-start;
+}
+
+.msg.user {
+  background: #0072ce;
+  color: white;
+  align-self: flex-end;
+}
+
+.options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.options button {
+  flex: 1;
+  min-width: 120px;
+  padding: 8px 12px;
+  border: none;
+  background: #0072ce;
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.options button:hover {
+  background: #005bb5;
+}
+
+.form-step {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 12px;
+}
+
+label {
+  display: flex;
+  flex-direction: column;
+  font-size: 14px;
+}
+
+select,
+input[list],
+input[type="date"] {
+  width: 100%;
+  padding: 8px;
+  margin: 6px 0 12px 0;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 15px;
+}
+
+select:focus,
+input:focus {
+  border-color: #0072ce;
+  outline: none;
+}
+
+.slot-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+  gap: 10px;
+  margin: 10px 0 15px 0;
+}
+
+.slot-item {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background: #f9f9f9;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-weight: 500;
+}
+
+.slot-item:hover {
+  background: #e6f0ff;
+  border-color: #0072ce;
+}
+
+.slot-item.selected {
+  background: #0072ce;
+  color: white;
+  border-color: #005bb5;
+}
+.summary-box {
+  background: #f1f6ff;
+  border: 1px solid #cfe3ff;
+  border-radius: 8px;
+  padding: 10px;
+  margin-bottom: 12px;
+  font-size: 14px;
+  color: #333;
+}
+
+.summary-box h4 {
+  margin-bottom: 8px;
+  color: #0072ce;
+}
+.error-text {
+  color: #d9534f;
+  font-size: 13px;
+  margin-top: -8px;
+  margin-bottom: 8px;
+}
+.chat-body {
+  flex-grow: 1;
+  overflow-y: auto;
+  padding-right: 6px;
+  max-height: 70vh;
+}
+
+.chat-body::-webkit-scrollbar {
+  width: 6px;
+}
+
+.chat-body::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 6px;
+}
+.chat-input {
+  display: flex;
+  padding: 10px;
+  border-top: 1px solid #ccc;
+  background: #f9f9f9;
+}
+
+.chat-input input {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.chat-input button {
+  margin-left: 8px;
+  padding: 10px 16px;
+  border: none;
+  background: #007bff;
+  color: white;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.chat-input button:hover {
+  background: #0056b3;
+}

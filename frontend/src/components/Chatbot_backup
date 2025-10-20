@@ -1,0 +1,243 @@
+import React, { useState } from "react";
+import SlotPicker from "./SlotPicker";
+import "./Chatbot.css";
+
+const Chatbot = () => {
+  const [step, setStep] = useState("main");
+  const [appointmentData, setAppointmentData] = useState({
+    purpose: "",
+    location: "",
+    date: "",
+    timeslot: "",
+    firstName: "",
+    lastName: "",
+    email: "",
+    mobile: "",
+  });
+
+  const [availableSlots] = useState([
+    "9:00 AM", "9:30 AM", "10:00 AM", "10:30 AM",
+    "11:00 AM", "2:00 PM", "2:30 PM", "3:00 PM",
+  ]);
+
+  const handleFieldChange = (field, value) => {
+    setAppointmentData({ ...appointmentData, [field]: value });
+  };
+
+  const handleSelectSlot = (slot) => {
+    setAppointmentData({ ...appointmentData, timeslot: slot });
+  };
+
+  const handleCancel = () => {
+    setAppointmentData({
+      purpose: "",
+      location: "",
+      date: "",
+      timeslot: "",
+      firstName: "",
+      lastName: "",
+      email: "",
+      mobile: "",
+    });
+    setStep("main");
+  };
+
+  const handleConfirm = () => {
+    setStep("confirm");
+  };
+
+  return (
+    <div className="chatbot-container">
+      <div className="chat-window">
+        <div className="chatbot-header">AI Appointment Assistant</div>
+
+        {/* === Step 1: Main Menu === */}
+        {step === "main" && (
+          <div className="msg bot">
+            Hi 👋, what would you like to do today?
+            <div className="options">
+              <button onClick={() => setStep("create")}>Create Appointment</button>
+              <button onClick={() => alert("Reschedule flow coming soon!")}>Reschedule</button>
+              <button onClick={() => alert("Cancel flow coming soon!")}>Cancel</button>
+            </div>
+          </div>
+        )}
+
+        {/* === Step 2: Create Appointment Form === */}
+        {step === "create" && (
+          <div className="form-step">
+            <label>Purpose of Visit:</label>
+            <select
+              value={appointmentData.purpose}
+              onChange={(e) => handleFieldChange("purpose", e.target.value)}
+            >
+              <option value="">-- Select Purpose --</option>
+              <option>Open An Account</option>
+              <option>Apply Credit Card</option>
+              <option>Manage spending And saving</option>
+              <option>Build credit and reduce debt</option>
+              <option>Death of a loved one</option>
+              <option>Save For Retirement</option>
+            </select>
+
+            <label>Preferred Location:</label>
+            <input
+              list="locations"
+              value={appointmentData.location}
+              onChange={(e) => handleFieldChange("location", e.target.value)}
+              placeholder="Type or choose location"
+            />
+            <datalist id="locations">
+              <option>New York, NY</option>
+              <option>Los Angeles, CA</option>
+              <option>San Francisco, CA</option>
+              <option>Chicago, IL</option>
+              <option>Dallas, TX</option>
+              <option>Atlanta, GA</option>
+              <option>Boston, MA</option>
+              <option>Miami, FL</option>
+              <option>Seattle, WA</option>
+              <option>Denver, CO</option>
+            </datalist>
+
+            <label>Preferred Date:</label>
+            <input
+              type="date"
+              value={appointmentData.date}
+              onChange={(e) => handleFieldChange("date", e.target.value)}
+            />
+
+            <div className="options">
+              <button
+                disabled={
+                  !appointmentData.purpose ||
+                  !appointmentData.location ||
+                  !appointmentData.date
+                }
+                onClick={() => setStep("viewSlots")}
+              >
+                View Timeslots
+              </button>
+              <button onClick={() => setStep("main")}>Main Menu</button>
+            </div>
+          </div>
+        )}
+
+        {/* === Step 3: View Time Slots (with summary) === */}
+        {step === "viewSlots" && (
+          <div className="form-step">
+            <div className="summary-box">
+              <p><b>Purpose:</b> {appointmentData.purpose}</p>
+              <p><b>Location:</b> {appointmentData.location}</p>
+              <p><b>Date:</b> {appointmentData.date}</p>
+            </div>
+
+            <label>Select an available timeslot:</label>
+            <SlotPicker
+              slots={availableSlots}
+              selectedSlot={appointmentData.timeslot}
+              onSelectSlot={handleSelectSlot}
+            />
+
+            <div className="options">
+              <button
+                disabled={!appointmentData.timeslot}
+                onClick={() => setStep("review")}
+              >
+                Review Details
+              </button>
+              <button onClick={() => setStep("create")}>Previous</button>
+              <button onClick={handleCancel}>Cancel Booking</button>
+            </div>
+          </div>
+        )}
+
+        {/* === Step 4: Review Details === */}
+        {step === "review" && (
+          <div className="form-step">
+            <div className="summary-box">
+              <h4>Review Your Appointment</h4>
+              <p><b>Purpose:</b> {appointmentData.purpose}</p>
+              <p><b>Location:</b> {appointmentData.location}</p>
+              <p><b>Date:</b> {appointmentData.date}</p>
+              <p><b>Time:</b> {appointmentData.timeslot}</p>
+            </div>
+
+            <label>First Name:</label>
+            <input
+              type="text"
+              placeholder="Enter First Name"
+              value={appointmentData.firstName}
+              onChange={(e) => handleFieldChange("firstName", e.target.value)}
+            />
+
+            <label>Last Name:</label>
+            <input
+              type="text"
+              placeholder="Enter Last Name"
+              value={appointmentData.lastName}
+              onChange={(e) => handleFieldChange("lastName", e.target.value)}
+            />
+
+            <label>Email Address:</label>
+            <input
+              type="email"
+              placeholder="Enter Email"
+              value={appointmentData.email}
+              onChange={(e) => handleFieldChange("email", e.target.value)}
+            />
+
+            <label>Mobile Number:</label>
+            <input
+              type="tel"
+              placeholder="Enter Mobile No."
+              value={appointmentData.mobile}
+              onChange={(e) => handleFieldChange("mobile", e.target.value)}
+            />
+
+            <div className="options">
+              <button
+                disabled={
+                  !appointmentData.firstName ||
+                  !appointmentData.lastName ||
+                  !appointmentData.email ||
+                  !appointmentData.mobile
+                }
+                onClick={handleConfirm}
+              >
+                Confirm Appointment
+              </button>
+              <button onClick={handleCancel}>Cancel Booking</button>
+            </div>
+          </div>
+        )}
+
+        {/* === Step 5: Confirmation Summary === */}
+        {step === "confirm" && (
+          <div className="msg bot">
+            ✅ <b>Appointment confirmed!</b>
+            <br />
+            <b>Purpose:</b> {appointmentData.purpose}
+            <br />
+            <b>Location:</b> {appointmentData.location}
+            <br />
+            <b>Date:</b> {appointmentData.date}
+            <br />
+            <b>Time:</b> {appointmentData.timeslot}
+            <br />
+            <b>Name:</b> {appointmentData.firstName} {appointmentData.lastName}
+            <br />
+            <b>Email:</b> {appointmentData.email}
+            <br />
+            <b>Mobile:</b> {appointmentData.mobile}
+            <div className="options">
+              <button onClick={() => setStep("main")}>Main Menu</button>
+            </div>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+};
+
+export default Chatbot;

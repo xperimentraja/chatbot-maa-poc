@@ -1,0 +1,145 @@
+.chatbot-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: #f7f8fa;
+}
+
+.chat-window {
+  width: 420px;
+  background: white;
+  border-radius: 12px;
+  padding: 16px;
+  box-shadow: 0 2px 14px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  font-family: "Segoe UI", sans-serif;
+}
+
+.msg {
+  padding: 10px 12px;
+  margin: 6px 0;
+  border-radius: 8px;
+  max-width: 80%;
+}
+
+.msg.bot {
+  background: #f3f3f3;
+  align-self: flex-start;
+}
+
+.msg.user {
+  background: #0072ce;
+  color: white;
+  align-self: flex-end;
+}
+
+.options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.options button {
+  flex: 1;
+  min-width: 120px;
+  padding: 8px 12px;
+  border: none;
+  background: #0072ce;
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.options button:hover {
+  background: #005bb5;
+}
+
+.form-step {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 12px;
+}
+
+label {
+  display: flex;
+  flex-direction: column;
+  font-size: 14px;
+}
+
+input[type="text"],
+input[type="date"] {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  outline: none;
+}
+
+.search-dropdown {
+  position: relative;
+}
+
+.dropdown-list {
+  position: absolute;
+  top: 38px;
+  left: 0;
+  width: 100%;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  max-height: 140px;
+  overflow-y: auto;
+  z-index: 5;
+}
+
+.dropdown-item {
+  padding: 8px;
+  cursor: pointer;
+}
+
+.dropdown-item:hover {
+  background: #eaeaea;
+}
+
+.dropdown-empty {
+  padding: 8px;
+  font-size: 13px;
+  color: #888;
+}
+
+.timeslot-options button {
+  flex: 1 1 30%;
+}
+.slot-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+  gap: 10px;
+  margin: 10px 0 15px 0;
+}
+
+.slot-item {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background: #f9f9f9;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-weight: 500;
+}
+
+.slot-item:hover {
+  background: #e6f0ff;
+  border-color: #0072ce;
+}
+
+.slot-item.selected {
+  background: #0072ce;
+  color: white;
+  border-color: #005bb5;
+}

@@ -1,0 +1,99 @@
+.app {
+  max-width: 500px;
+  margin: 40px auto;
+  font-family: sans-serif;
+  text-align: center;
+}
+
+.title {
+  color: #bb2d3b;
+  margin-bottom: 10px;
+}
+
+.chatbot {
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding: 15px;
+  background: #fff;
+  height: 70vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.messages {
+  flex: 1;
+  overflow-y: auto;
+  margin-bottom: 10px;
+  padding-right: 5px;
+}
+
+.bot-msg, .user-msg {
+  margin: 8px 0;
+  padding: 10px;
+  border-radius: 10px;
+  width: fit-content;
+}
+
+.bot-msg {
+  background: #f1f1f1;
+  align-self: flex-start;
+}
+
+.user-msg {
+  background: #0071bb;
+  color: white;
+  align-self: flex-end;
+}
+
+button, select, input {
+  margin-top: 8px;
+  padding: 6px 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  cursor: pointer;
+}
+
+.input-box {
+  display: flex;
+}
+
+.input-box input {
+  flex: 1;
+  padding: 8px;
+  border-radius: 5px;
+}
+
+.input-box button {
+  background: #bb2d3b;
+  color: white;
+  border: none;
+  margin-left: 6px;
+  border-radius: 5px;
+  padding: 8px 16px;
+}
+
+.bot-form {
+  background: #f3f4f6;
+  padding: 12px;
+  border-radius: 12px;
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 320px;
+}
+.bot-form input,
+.bot-form select {
+  padding: 6px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+.bot-form button {
+  background: #2563eb;
+  color: white;
+  padding: 8px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
