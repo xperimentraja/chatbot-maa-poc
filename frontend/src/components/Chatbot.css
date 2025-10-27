@@ -143,3 +143,14 @@ input[type="date"] {
   color: white;
   border-color: #005bb5;
 }
+.star.selected {
+  color: #ffb400;
+}
+.star:hover {
+  color: #ffcc33;
+}
+textarea {
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  padding: 8px;
+}

@@ -82,6 +82,12 @@ const Chatbot = () => {
   const handleSelectSlot = (slot) => {
     setAppointmentData({ ...appointmentData, timeslot: slot });
   };
+  const [feedback, setFeedback] = useState({
+  rating: 0,
+  comments: "",
+  submitted: false,
+});
+
 
   const handleCancel = () => {
 //    setAppointmentData({
@@ -113,7 +119,8 @@ const handleDownloadReceipt = () => {
 
   doc.setFont("helvetica", "bold");
   doc.setFontSize(16);
-  doc.text("Appointment Confirmation Receipt", 20, 20);
+  doc.text("Appointment Confirmation Receipt", 105, 20, { align: "center" });
+//  doc.addImage(logoBase64, "PNG", 160, 10, 30, 15);
 
   doc.setFont("helvetica", "normal");
   doc.setFontSize(12);
@@ -235,7 +242,7 @@ const handleDownloadReceipt = () => {
     case "help":
       addToHistory("bot", "You can say things like:\n• Book an appointment\n• Show my appointments\n• Modify or cancel\n• Add notes\n• Request a callback");
       break;
-
+	
     default:
       addToHistory("bot", "Hmm, I’m not sure I understood that. Try saying ‘book appointment’, ‘my appointments’, or ‘help’.");
       break;
@@ -268,7 +275,7 @@ const handleDownloadReceipt = () => {
                 <button onClick={() => setStep("create")}>Create Appointment</button>
                 <button onClick={() => setStep("myAppointments")}>My Appointments</button>
                 <button onClick={() => alert("Appointment Help (Coming Soon)")}>Appointment Help</button>
-                <button onClick={() => alert("Ask me anything (Coming Soon)")}>Ask Any</button>
+                <button onClick={() => setStep("feedback")}>Rate Us</button>
               </div>
             </div>
           )}
@@ -485,7 +492,7 @@ const handleDownloadReceipt = () => {
           <button onClick={() => alert(`Request Call Back: ${appt.reference}`)}>
             Request Call Back
           </button>
-		  <button onClick={() => alert(`Book Followup: ${appt.reference}`)}>
+		  <button onClick={() => alert(`Quick Rebook: ${appt.reference}`)}>
             Book Followup
           </button>
 		  <button onClick={() => alert(`Help: ${appt.reference}`)}>
@@ -499,6 +506,63 @@ const handleDownloadReceipt = () => {
     </div>
   </div>
 )}
+{/* === Step 6: Feedback / Rate Experience === */}
+{step === "feedback" && (
+  <div className="form-step">
+    {!feedback.submitted ? (
+      <>
+        <h4>⭐ Share Your Feedback</h4>
+        <p>We’d love to hear how your experience was!</p>
+
+        <div className="rating">
+          {[1, 2, 3, 4, 5].map((star) => (
+            <span
+              key={star}
+              className={`star ${feedback.rating >= star ? "selected" : ""}`}
+              onClick={() => setFeedback({ ...feedback, rating: star })}
+              style={{
+                cursor: "pointer",
+                fontSize: "24px",
+                color: feedback.rating >= star ? "#ffb400" : "#ccc",
+              }}
+            >
+              ★
+            </span>
+          ))}
+        </div>
+
+        <textarea
+          placeholder="Write your comments here..."
+          value={feedback.comments}
+          onChange={(e) => setFeedback({ ...feedback, comments: e.target.value })}
+          rows="4"
+          style={{ width: "100%", marginTop: "10px" }}
+        ></textarea>
+
+        <div className="options">
+          <button
+            disabled={!feedback.rating}
+            onClick={() =>
+              setFeedback({ ...feedback, submitted: true })
+            }
+          >
+            Submit Feedback
+          </button>
+          <button onClick={() => setStep("main")}>Main Menu</button>
+        </div>
+      </>
+    ) : (
+      <div className="msg bot">
+        🎉 <b>Thank you for your feedback!</b>
+        <p>We truly appreciate you taking the time to share your thoughts.</p>
+        <div className="options">
+          <button onClick={() => setStep("main")}>Main Menu</button>
+        </div>
+      </div>
+    )}
+  </div>
+)}
+
           <div ref={chatEndRef}></div>
 		  <div className="chat-input">
 			  <input
